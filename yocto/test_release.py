@@ -62,6 +62,18 @@ def test_displayport(command):
     assert returncode == 0
 
 
+def test_i2c(command):
+    cmd = """
+    i2cdetect -r -y 0
+    i2cdetect -r -y 1
+    i2cdetect -r -y 2
+    i2cdetect -r -y 3
+    i2cdetect -r -y 4
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
