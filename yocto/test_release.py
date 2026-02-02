@@ -1,3 +1,13 @@
+import time
+
+def test_power_on_board(target):
+    power = target.get_driver('PowerProtocol', name="NanoKVM-1")
+    # Force reset
+    power.off()
+    time.sleep(1)
+    power.on()
+
+
 def test_can(command):
     cmd = """
     ip link set can0 up type can restart-ms 100 bitrate 1000000 dbitrate 5000000 fd on

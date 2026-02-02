@@ -5,8 +5,11 @@ targets:
         port: "/dev/ttyUSB-sh-main"
         speed: 921600
     drivers:
-      ManualPowerDriver:
-        name: "example"
+      ExternalPowerDriver:
+        name: "NanoKVM-1"
+        cmd_on: '/tftp/kvm_power_control.sh on'
+        cmd_off: '/tftp/kvm_power_control.sh off'
+        #cmd_cycle: 'example_command cycle' # Maybe toggle, but currently not supported in my labo
       SerialDriver: {}
       ShellDriver:
         prompt: 'root@sparrow-hawk'
