@@ -11,7 +11,7 @@ See also: https://labgrid.readthedocs.io/en/latest/getting_started.html
 python3 -m venv labgrid-venv
 source labgrid-venv/bin/activate
 pip install --upgrade pip
-pip install labgrid
+pip install labgrid pytest-html
 ```
 
 ### udev rules
