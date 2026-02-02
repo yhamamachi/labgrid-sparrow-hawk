@@ -131,6 +131,17 @@ def test_pwm(command):
     assert returncode == 0
 
 
+def test_pcie(command):
+    cmd = """
+    lspci
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+    assert "0000:00:00.0 PCI bridge: Renesas Technology Corp. Device 0030" in stdout
+    assert "0000:01:00.0 USB controller: Renesas Technology Corp. uPD720201 USB 3.0 Host Controller (rev 03)" in stdout
+    assert "0001:00:00.0 PCI bridge: Renesas Technology Corp. Device 0030" in stdout
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
