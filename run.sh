@@ -8,7 +8,7 @@ if [[ ! -e "${SCRIPT_DIR}/labgrid-venv" ]]; then
     python3 -m venv ${SCRIPT_DIR}/labgrid-venv
     source ${SCRIPT_DIR}/labgrid-venv/bin/activate
     pip install --upgrade pip
-    pip install --upgrade labgrid
+    pip install --upgrade labgrid pytest-html
 else
     source ${SCRIPT_DIR}/labgrid-venv/bin/activate
 fi
@@ -16,5 +16,5 @@ fi
 # Run testsuite
 cd ${SCRIPT_DIR}/yocto
 #pytest --lg-env local.yaml --capture=no test_shell.py
-pytest --lg-env local.yaml --capture=no test_release.py
+pytest --lg-env local.yaml -s test_release.py --html=report.html
 
