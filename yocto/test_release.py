@@ -28,6 +28,31 @@ def test_ethernet(command):
     assert returncode == 0
 
 
+def test_audio(command):
+    cmd = """
+    amixer set "Headphone" 40%
+    amixer set "Headphone" on
+    amixer set "Mixout Left DAC Left" on
+    amixer set "Mixout Right DAC Right" on
+    amixer set "Aux" on
+    amixer set "Aux" 80%
+    amixer set "Mixin PGA" on
+    amixer set "Mixin PGA" 50%
+    amixer set "ADC" on
+    amixer set "ADC" 80%
+    amixer set "Mixin Left Aux Left" on
+    amixer set "Mixin Right Aux Right" on
+    amixer set "Mic 1" on
+    amixer set "Mic 1" 80%
+    amixer set "Mixin Left Mic 1" on
+    amixer set "Mixin Right Mic 1" on
+
+    arecord -D hw:0,0 -t wav -c 2 -d 5 -r 48000 -f S16_LE | aplay
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
