@@ -120,6 +120,17 @@ def test_pidisplay(command):
     assert returncode == 0
 
 
+def test_pwm(command):
+    cmd = """
+    echo 2 > /sys/class/hwmon/hwmon4/pwm1_enable
+    echo 150 > /sys/class/hwmon/hwmon4/pwm1
+    sleep 10
+    echo 255 > /sys/class/hwmon/hwmon4/pwm1
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
