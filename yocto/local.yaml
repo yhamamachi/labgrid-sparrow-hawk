@@ -11,6 +11,10 @@ targets:
         cmd_off: '/tftp/kvm_power_control.sh off'
         #cmd_cycle: 'example_command cycle' # Maybe toggle, but currently not supported in my labo
       SerialDriver: {}
+      UBootDriver:
+        prompt: '=> '
+        boot_commands:
+          autoconf: 'setenv bootargs "rw root=/dev/mmcblk0p1 rootwait" && load mmc 0:1 ${loadaddr} /boot/fitImage && source ${loadaddr}:script'
       ShellDriver:
         prompt: 'root@sparrow-hawk'
         login_prompt: ' login: '
