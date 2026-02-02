@@ -99,6 +99,18 @@ def test_thermal(command):
     assert returncode == 0
 
 
+def test_picamera(command):
+    cmd = """
+    cam -l
+    timeout 10 cam -c 1 --capture=30 --file=/dev/null
+    timeout 10 cam -c 2 --capture=30 --file=/dev/null
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+    assert "1: External camera 'imx219' (/base/soc/i2c@e6508000/cam@10)" in stdout
+    assert "2: External camera 'imx708' (/base/soc/i2c@e6510000/sensor@1a)" in stdout
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
