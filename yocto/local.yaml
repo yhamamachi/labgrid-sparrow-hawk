@@ -10,9 +10,11 @@ targets:
         cmd_on: '/tftp/kvm_power_control.sh on'
         cmd_off: '/tftp/kvm_power_control.sh off'
         #cmd_cycle: 'example_command cycle' # Maybe toggle, but currently not supported in my labo
-      SerialDriver: {}
+      SerialDriver:
+        txdelay: 0.05
       UBootDriver:
         prompt: '=> '
+        autoboot: 'Hit any key'
         boot_commands:
           autoconf: 'setenv bootargs "rw root=/dev/mmcblk0p1 rootwait" && load mmc 0:1 ${loadaddr} /boot/fitImage && source ${loadaddr}:script'
       ShellDriver:

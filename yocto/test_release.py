@@ -7,6 +7,19 @@ def test_power_on_board(target):
     time.sleep(1)
     power.on()
 
+def test_flash_image_minimal(uboot_command):
+    cmd = "run flash_mmc_minimal"
+    stdout, stderr, returncode = uboot_command.run(cmd)
+    assert returncode == 0
+
+
+def test_reset_board_after_flashing_image(target):
+    power = target.get_driver('PowerProtocol', name="NanoKVM-1")
+    # Force reset
+    power.off()
+    time.sleep(1)
+    power.on()
+
 
 def test_can(command):
     cmd = """
@@ -173,3 +186,8 @@ def test_shell(command):
     assert returncode != 0
     assert not stdout
     assert not stderr
+
+def test_power_off_board(target):
+    power = target.get_driver('PowerProtocol', name="NanoKVM-1")
+    # Force reset
+    power.off()
