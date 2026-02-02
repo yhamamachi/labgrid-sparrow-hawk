@@ -111,6 +111,15 @@ def test_picamera(command):
     assert "2: External camera 'imx708' (/base/soc/i2c@e6510000/sensor@1a)" in stdout
 
 
+def test_pidisplay(command):
+    cmd = """
+    ls /sys/class/drm/card0-DSI-1 >/dev/null
+    cat /sys/class/drm/card0-DSI-1/connector_id
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
