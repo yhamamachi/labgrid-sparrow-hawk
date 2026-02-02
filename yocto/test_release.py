@@ -88,6 +88,17 @@ def test_i2c(command):
     assert "Hello" in stdout
 
 
+def test_thermal(command):
+    cmd = """
+    for i in `seq 10`; do \
+        cat /sys/class/thermal/thermal_zone*/temp; \
+        sleep 1s; \
+    done
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
