@@ -13,8 +13,13 @@ else
     source ${SCRIPT_DIR}/labgrid-venv/bin/activate
 fi
 
+VERBOSE=""
+if [[ "$1" == "--verbose" ]]; then
+    VERBOSE=" --log-cli-level=INFO --log-level=INFO"
+fi
+
 # Run testsuite
 cd ${SCRIPT_DIR}/yocto
 #pytest --lg-env local.yaml --capture=no test_shell.py
-pytest --lg-env local.yaml -s test_release.py --html=report.html
+pytest --lg-env local.yaml -s test_release.py --html=report.html ${VERBOSE}
 
