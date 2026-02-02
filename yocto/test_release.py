@@ -142,6 +142,16 @@ def test_pcie(command):
     assert "0001:00:00.0 PCI bridge: Renesas Technology Corp. Device 0030" in stdout
 
 
+def test_usb(command):
+    cmd = """
+    lsusb
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+    assert "Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub" in stdout
+    assert "Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub" in stdout
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
