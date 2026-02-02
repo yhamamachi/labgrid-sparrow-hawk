@@ -2,12 +2,13 @@ targets:
   main:
     resources:
       RawSerialPort:
-        port: "/dev/ttyUSB0"
+        port: "/dev/ttyUSB-sh-main"
+        speed: 921600
     drivers:
       ManualPowerDriver:
         name: "example"
       SerialDriver: {}
       ShellDriver:
-        prompt: 'root@\w+:[^ ]+ '
+        prompt: 'root@sparrow-hawk'
         login_prompt: ' login: '
         username: 'root'
