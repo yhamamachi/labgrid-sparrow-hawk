@@ -74,6 +74,20 @@ def test_i2c(command):
     assert returncode == 0
 
 
+def test_i2c(command):
+    cmd = """
+    stty -F /dev/ttySC2 -echo
+    cat /dev/ttySC2 &
+    sleep 0.2
+    echo Hello > /dev/ttySC2
+    sleep 2
+    killall cat
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+    assert "Hello" in stdout
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
