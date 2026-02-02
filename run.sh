@@ -15,5 +15,6 @@ fi
 
 # Run testsuite
 cd ${SCRIPT_DIR}/yocto
-pytest --lg-env local.yaml --capture=no test_shell.py
+#pytest --lg-env local.yaml --capture=no test_shell.py
+pytest --lg-env local.yaml --capture=no test_release.py
 
