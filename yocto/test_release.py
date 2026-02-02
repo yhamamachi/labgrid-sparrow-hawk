@@ -20,6 +20,14 @@ def test_can(command):
     assert "  can1  00A  [16]  0A 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00" in stdout
 
 
+def test_ethernet(command):
+    cmd = """
+    ping 1.1.1.1 -c 4
+    """
+    stdout, stderr, returncode = command.run(cmd)
+    assert returncode == 0
+
+
 def test_shell(command):
     stdout, stderr, returncode = command.run("cat /proc/version")
     assert returncode == 0
